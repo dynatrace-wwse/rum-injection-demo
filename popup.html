@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 15px;
+      width: 320px;
+      border-radius: 10px;
+      background: #f9f9f9;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    .section {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 15px;
+      background: #fff;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    input,
+    select,
+    button {
+      width: 100%;
+      margin-top: 5px;
+      padding: 6px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .error {
+      color: red;
+      font-size: 12px;
+    }
+
+    .match {
+      color: green;
+      font-weight: bold;
+      float: right;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 5px;
+      margin-top: 8px;
+    }
+
+    #historyList {
+      max-height: 100px;
+      overflow-y: auto;
+      padding-left: 20px;
+      margin-top: 10px;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>RUM Injector</h2>
+  <div class="section">
+    <label>Target URL Pattern <span id="matchStatus"></span></label>
+    <input id="urlPattern" placeholder="e.g., .*example\\.com" />
+    <div class="button-row">
+      <button id="currentUrlBtn">Use Current Page URL</button>
+      <button id="domainUrlBtn">Target All Pages of This Domain</button>
+    </div>
+    <div id="urlError" class="error"></div>
+
+    <label>JavaScript File URL</label>
+    <input id="jsCode" placeholder="https://example.com/script.js" />
+    <div id="jsError" class="error"></div>
+
+    <label>Tag Placement</label>
+    <select id="injectAt">
+      <option value="head">&lt;head&gt;</option>
+      <option value="body">&lt;/body&gt;</option>
+    </select>
+
+    <button id="saveBtn">Save</button>
+    <button id="clearFieldsBtn">Clear</button>
+    <button id="stopBtn">End</button>
+
+  </div>
+
+  <div class="section">
+    <h4>Injection History</h4>
+    <ul id="historyList"></ul>
+    <button id="clearBtn">Clear History</button>
+  </div>
+</body>
+<script src="popup.js"></script>
+
+</html>

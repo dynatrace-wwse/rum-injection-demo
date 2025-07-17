@@ -1,84 +1,31 @@
-# Dynatrace SE RUM Injection Demo
+# 🧪 Loading a Temporary Firefox Add-on
 
-## Download and Install Extension
+This guide helps you temporarily load a custom add-on in Firefox using the built-in extensions menu. This is the only method to achieve this in Firefox without submiting the addon for approval. 
 
-1. Open Chrome and navigate to [https://github.com/dynatrace-wwse/rum-injection-demo](https://github.com/dynatrace-wwse/rum-injection-demo), click the `Code` button, then `Download ZIP`
 
-![download plugin](docs/imgs/download_repo_zip.png)
+## 🛠️ Load the Add-on
 
-2. Open your download folder and unzip `rum-injection-demo-main.zip`
+1. **Open Firefox**
+   - Launch the Firefox browser
 
-![unzipped plugin](docs/imgs/unzipped-plugin.png)
+2. **Go to Debug Extensions**
+   - Type `about:debugging` in the address bar and hit Enter
+   - In newer versions, choose **This Firefox**
 
-3. In Chrome, select `menu "𐄛"  > Extensions > Manage Extensions`
+3. **Click "Load Temporary Add-on"**
+   - Click the **Load Temporary Add-on** button
+   - Browse to your extension directory
+   - Select the `manifest.json` file. It will load the full folder.
 
-4. Enable Developer Mode in the top right
+4. **Verify Installation**
+   - Your add-on should now appear in the list of installed extensions
+   - Clicking the extension will provide you with various options to target a specific page for injection and for including the javascript file from your RUM tag
 
-5. Click `Load Unpacked`
+## 🔄 Keep in Mind
 
-6. Nagivated to the unzipped directory from step #2 and click `Select`
+- Temporary add-ons are removed when Firefox is closed
+- You'll need to reload them each time you restart the browser
 
-![install unpacked extension](docs/imgs/install-unpacked-extension.gif)
+---
 
-## Setting Up Web Application in Dynatrace
-
-1. Navigate to the hub and search for "Web application monitoring via manual insertion" and click “Set up”  
-![alt text](docs/imgs/hub-add-webapp.png)
-
-2. Type in the domain of the website you want to monitor and click "add web application"  
-![alt text](docs/imgs/add-real-user-monitoring-website.png)
-
-3. Copy the src url, you’ll enter this into the extension   
-![alt text](docs/imgs/add-real-user-monitoring-copy-js-tag.png)
-
-4. Click `View Application` this brings you to the application screen  
-
-5. Check the 3 dots and select edit  
-![alt text](docs/imgs/web-application-access-settings.png)
-
-6. Under General Settings, navigate to "enablement and cost control", toggle on "Enable New Real User Monitoring Experience" and "Enable Session Replay Classic" and click "Save Changes"  
-![alt text](docs/imgs/enable-new-experience-and-replay.png)
-
-## Configure Extension for Demo
-
-1. Navigate to `Web Application Injection Setup` settings page in Dynatrace, and copy the src value from the javaScript tag snippet
-![injection setup](docs/imgs/injection-setup-settings.png)
-
-2. Click the `Extension` icon ![Extension Button](docs/imgs/extension-button.png)  in toolbar, then Click `Dynatrace RUM Injector` extension.
-
-3. Enter the domain of the site you wish to demo on, then paste your javascript src url from step #1, and hit `Save`
-![configure extension](docs/imgs/configure-extension.gif)
-
-##  Content Security Policy Warnings
-
-You may encounter sites that restrict remote content loading and request using the [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP). 
-
->Content Security Policy (CSP) is a feature that helps to prevent or minimize the risk of certain types of security threats. It consists of a series of instructions from a website to a browser, which instruct the browser to place restrictions on the things that the code comprising the site is allowed to do.
-> The primary use case for CSP is to control which resources, in particular JavaScript resources, a document is allowed to load. This is mainly used as a defense against [cross-site scripting (XSS)](https://developer.mozilla.org/en-US/docs/Glossary/Cross-site_scripting) attacks, in which an attacker is able to inject malicious code into the victim's site.
-
-Since we are injecting our RUM locally via an extension, you may see these warnings in your DevTool Console, for example:
-
-![csp-warning-example](docs/imgs/csp-warning-example.png)
-
-### Temporarily Override Content-Security-Policy using DevTools
-
-1. Navigate to the site you plan to demo on, and was configured in your extension settings
-
-2. Open the Developer Tools `View > Developer > Developer Tools`
-![Open Developer Tools](docs/imgs/open-devtools.png)
-
-3. Switch to the `Sources` tab, then `Overrides` sub-tab. 
-
-4. Click `Select folder for overrides`
-
-5. Navigate to `overrides` directory in you unzipped extension folder and press `Select`
-![Enabled Source Overrides in DevTools](docs/imgs/devtools-enable-overrides.gif)
-
-6. Refresh the page and you should no any CSP warning, and the RUM extension and beacon calls should now be seen in the network tab
-![Validate Overrides Are Functioning](docs/imgs/validate-csp-overrides-and-functionality.gif)
-
-> ⚠️ **Warning these overrides only function while the DevTool window is open.  Be sure to leave the DevTool open for the entire time you are running your demo** ⚠️
-
-> Normally, **RUM** sessions end on of the ways documented here: [https://docs.dynatrace.com/docs/shortlink/user-session#user-session-end]()
->
-> However, we want to be able to create a bunch of sessions quickly without having to close the browser or wait for inactivity. To do this, navigate to the console in Chrome Dev Tools and type `dtrum.endSession()` and hit enter 
+Happy testing!
