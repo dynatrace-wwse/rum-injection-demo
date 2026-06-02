@@ -1,5 +1,7 @@
 # Dynatrace SE RUM Injection Demo
 
+## NOTE: This is an internal-only Dynatrace tool and is not suitable for customer use at this time due to security reasons.
+
 ## Download and Install Extension
 
 1. Open Chrome and navigate to [https://github.com/dynatrace-wwse/rum-injection-demo](https://github.com/dynatrace-wwse/rum-injection-demo), click the `Code` button, then `Download ZIP`
